@@ -3,10 +3,12 @@ from math import *
 from time import *
 
 
+# проверка, что введенная строка string является натуральным числом до границы border включительно
 def is_valid(string, border):
     return string.isdigit() and 1 <= int(string) <= border
 
 
+# запрос числа с предварительным выводом сообщения text
 def get_number(text):
     while True:
         string = input(text)
@@ -16,28 +18,32 @@ def get_number(text):
             print('Некорректный ввод!', end='')
 
 
-def set_goal_number_and_attempt(b):
-    return randint(0, b), ceil(log2(b))
+# загадываем число (1 элемент) и устанавливаем число попыток (2 элемент)
+# с учетом верхней границы border включительно
+def set_goal_number_and_attempt(border):
+    return randint(0, border), ceil(log2(border))
 
 
-def is_game_win(a, g):
+# игровая логика, где attempts - число попыток, desired_number - загаданное число
+def is_game_win(attempts, desired_number):
     temp = 0
-    while a > 0:
-        a -= 1
+    while attempts > 0:
+        attempts -= 1
         temp += 1
         user_number = get_number(f'\nПопытка №{temp}: ')
-        if g < user_number:
+        if desired_number < user_number:
             print('Слишком много! ', end='')
-        elif g > user_number:
+        elif desired_number > user_number:
             print('Слишком мало! ', end='')
         else:
             print('Ура, угадано! ')
             return True
-        if a > 0:
+        if attempts > 0:
             print('Попробуй еще раз: ', end='')
     return False
 
 
+# Основная программа
 flag = True
 print('Добро пожаловать в числовую угадайку!\nДанная игра существует благодаря курсу "Поколение Python" '
       'https://stepik.org/course/58852')
