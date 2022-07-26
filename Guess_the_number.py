@@ -1,5 +1,6 @@
 from random import *
 from math import *
+from time import *
 
 
 def is_valid(string, border):
@@ -38,11 +39,12 @@ def is_game_win(a, g):
 
 
 flag = True
-print('Добро пожаловать в числовую угадайку! Данная игра существует благодаря курсу "Поколение Python" '
+print('Добро пожаловать в числовую угадайку!\nДанная игра существует благодаря курсу "Поколение Python" '
       'https://stepik.org/course/58852')
 while flag:
     upper_border = get_number('Введи любое число от 1 до 100, в рамках которого будет выбрано случайное: ')
     goal_number, attempt = set_goal_number_and_attempt(upper_border)
-    print(f'Угадай, какое число было загадано? У тебя {attempt} попытки', end='')
+    print(f'Угадай, какое число было загадано?\nТы можешь {attempt} раз(а) ввести свой/и вариант(ы) ответа.', end='')
     flag = is_game_win(attempt, goal_number)
 print('Игра окончена!')
+sleep(6)
